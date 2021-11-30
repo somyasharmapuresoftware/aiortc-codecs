@@ -23,11 +23,11 @@ jobs:
         with:
           python-version: 3.8
       - name: Install yasm and nasm (ubuntu-latest)
-        if: matrix.os == 'ubuntu-latest'
+        if:  ${{ matrix.arch == 'aarch64' }}
         run: |
-          apt-get update -y
-          apt-get install -y yasm
-          apt-get install -y nasm
+          yum install epel-release -y
+          yum install yasm -y
+          yum install nasm -y
       - name: Install yasm (macos)
         if: matrix.os == 'macos-latest'
         run: |
