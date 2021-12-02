@@ -18,10 +18,15 @@ jobs:
       - name: Set up QEMU
         if:  ${{ matrix.arch == 'aarch64' }}
         uses: docker/setup-qemu-action@v1
-        
       - uses: actions/setup-python@v1
         with:
           python-version: 3.8
+      - name: Install yasm and nasm (ubuntu-latest)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y yasm
+          sudo apt-get install -y nasm
       - name: Install yasm (macos)
         if: matrix.os == 'macos-latest'
         run: |
